@@ -1,8 +1,8 @@
 /*
- * Full Name:     [Your Name]
- * Student ID:    [Your NUID]
+ * Full Name:     Isabella Ferrisi
+ * Student ID:    002077163
  * Course:        EECE 2140 - Computing Fundamentals for Engineers
- * Section:       [Your Section]
+ * Section:       05
  * Semester:      Fall 2026
  * Assignment:    Homework 2 - Calendar Toolkit
  * Compilation:   g++ -std=c++11 main.cpp -o main
