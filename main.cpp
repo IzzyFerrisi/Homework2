@@ -176,27 +176,27 @@ int main()
 //              2100 are not).
 bool isLeapYear(int year)
 {
-    if (year % 4 == 0)
+    if (year % 4 == 0) // if statement if year is divisible by 4 is true
     {
-        if (year % 100 == 0)
+        if (year % 100 == 0) // if state if year is divisible by 100 is true
         {
-            if (year % 400 == 0)
+            if (year % 400 == 0) // if ststament is year is divisible by 400 is true
             {
-                return true;
+                return true; // if year is divisible by 400 and 100 it is a leap year so its true
             }
             else
             {
-                return false;
+                return false; // if divisible by 100 but not 400 then it is not a leap year so false
             }
         }
-        else
+        else 
         {
-            return true;
+            return true; // if year is divisible by 4 but not by 100 it is still a leap year
         }
     }
     else
     {
-        return false;
+        return false; // if year is not divisible by 4 it is not a leap year so false
     }
 }
 
@@ -208,25 +208,25 @@ bool isLeapYear(int year)
 //                 for February, depending on whether year is a leap year).
 int daysInMonth(int month, int year)
 {
-  assert (1 <= month && month <= 12);
-  switch (month)
+  assert(1 <= month && month <= 12); // asserting that month is valid if its between 1 and 12
+  switch (month) // establishing month cases
   {
-    case 2:
-        if (isLeapYear(year))
+    case 2: // february case
+        if (isLeapYear(year)) // if statement for if year is a leap year
         {
-            return 29;
+            return 29; // on a leap year the month of february will have 29 days
         }
         else
         {
-            return 28;
+            return 28; // on a non-leap year the month of february will have 28 days
         }
-    case 4:
-    case 6:
-    case 9:
-    case 11:
-        return 30;
-    default:
-        return 31;  
+    case 4: // case for april
+    case 6: // case for june
+    case 9: // case for september
+    case 11: // case for november
+        return 30; // the above months will have 30 days in the month
+    default: // default for case for all other months
+        return 31;  // all other months will have 31 days in the month
   }
 }
 
@@ -239,19 +239,19 @@ int daysInMonth(int month, int year)
 //   Constraint: use daysInMonth for the number of days in the month.
 bool isValidDate(int day, int month, int year)
 {
-   if (year < MIN_YEAR || year > MAX_YEAR)
+   if (year < MIN_YEAR || year > MAX_YEAR) // if statement for if the the year is not within the valid range
    {
-        return false;
+        return false; // if year is not within the valid range it is not a valid date
    } 
    if (month < 1 || month > 12)
    {
-        return false;
+        return false; // if month is not within the valid range it is not a valid date
    }
    if (day < 1 || day > daysInMonth(month, year))
    {
-        return false;
+        return false; // if day is not within the valid range it is not a valid date
    }
-   return true;
+   return true; // if year month and day are in the valid range it is a valid date
 }
 
 // TODO: daysSince1900
@@ -262,30 +262,30 @@ bool isValidDate(int day, int month, int year)
 //                 1 February 1900, and so on).
 int daysSince1900(int day, int month, int year)
 {
-    assert (isValidDate(day, month, year));
+    assert(isValidDate(day, month, year)); // asserting that the date is valid
     
-    int daycount = 0;
+    int daycount = 0; // declaring varibale "daycount" to store number of days
     
-    for (int y = MIN_YEAR; y < year; ++y)
+    for (int y = MIN_YEAR; y < year; ++y) // for loop to add days to the daycount starting from minimum year
     {
-        if (isLeapYear(y))
+        if (isLeapYear(y)) // if statement for if the year is a leap year
         {
-            daycount += 366;
+            daycount += 366; // adding 366 days for a leap year
         }
         else
         {
-            daycount += 365;
+            daycount += 365; // adding 365 days for a non-leap year
         }
     }
     
-    for (int m = 1; m < month; ++m)
+    for (int m = 1; m < month; ++m) // for loop to add days to the daycount for each month before the given month
     {
-        daycount += daysInMonth(m, year);
+        daycount += daysInMonth(m, year); // adding days for each month before the given month
     }
 
-    daycount += day - 1;
+    daycount += day - 1; // adding days for given month - 1 to account for starting the count from day 1, not 0
 
-    return daycount;
+    return daycount; // returning the total number of days since January 1st 1900
 }
           
 // TODO: dayOfWeek
@@ -296,9 +296,10 @@ int daysSince1900(int day, int month, int year)
 //   Constraint:   use daysSince1900.
 Weekday dayOfWeek(int day, int month, int year)
 {
-    assert (isValidDate(day, month, year));
-    int weekdaynumber = (1 + daysSince1900(day, month, year)) % 7;
-    return static_cast<Weekday>(weekdaynumber);
+    assert(isValidDate(day, month, year)); // asserting that the date is valid
+    int weekdaynumber = (1 + daysSince1900(day, month, year)) % 7; // calculating the day of the week based on days since 1900 and its divisibility by 7 
+    //adding 1 to dayssince1900 to account for January 1st 1900 being a monday which = 1 in enum
+    return static_cast<Weekday>(weekdaynumber); // returning what day of the week it is based on the calculated number
 }
 
 // TODO: printWeekdayName
@@ -312,28 +313,28 @@ Weekday dayOfWeek(int day, int month, int year)
 //   Returns:    nothing.
 void printWeekdayName(Weekday weekday, bool abbreviated)
 {
-    switch (weekday)
+    switch (weekday) // switch statement for each day of the week
     {
-        case Weekday::Sunday:
-            std::cout << (abbreviated ? "Sun" : "Sunday");
+        case Weekday::Sunday: // case for sunday
+            std::cout << (abbreviated ? "Sun" : "Sunday"); // printing Sun or Sunday based on the abbreviated parameter
             break;
-        case Weekday::Monday:
-            std::cout << (abbreviated ? "Mon" : "Monday");
+        case Weekday::Monday: // case for monday
+            std::cout << (abbreviated ? "Mon" : "Monday"); // printing Mon or Monday based on the abbreviated parameter
             break;
-        case Weekday::Tuesday:
-            std::cout << (abbreviated ? "Tue" : "Tuesday") ;
+        case Weekday::Tuesday: // case for tuesday
+            std::cout << (abbreviated ? "Tue" : "Tuesday") ; // printing Tue or Tuesday based on the abbreviated parameter
             break;
-        case Weekday::Wednesday:
-            std::cout << (abbreviated ? "Wed" : "Wednesday");
+        case Weekday::Wednesday: // case for wednesday
+            std::cout << (abbreviated ? "Wed" : "Wednesday"); // printing Wed or Wednesday based on the abbreviated parameter
             break;
-        case Weekday::Thursday:
-            std::cout << (abbreviated ? "Thu" : "Thursday");
+        case Weekday::Thursday: // case for thursday
+            std::cout << (abbreviated ? "Thu" : "Thursday"); // printing Thu or Thursday based on the abbreviated parameter
             break;
-        case Weekday::Friday:
-            std::cout << (abbreviated ? "Fri" : "Friday");
+        case Weekday::Friday: // case for friday
+            std::cout << (abbreviated ? "Fri" : "Friday"); // printing Fri or Friday based on the abbreviated parameter
             break;
-        case Weekday::Saturday:
-            std::cout << (abbreviated ? "Sat" : "Saturday");
+        case Weekday::Saturday: // case for saturday
+            std::cout << (abbreviated ? "Sat" : "Saturday"); // printing Sat or Saturday based on the abbreviated parameter
             break;  
     }
 }
@@ -347,19 +348,19 @@ void printWeekdayName(Weekday weekday, bool abbreviated)
 //   Returns:      nothing.
 void printDate(int day, int month, int year)
 {
-    std::cout << year << "-";
+    std::cout << year << "-"; // printing the year and a space
 
-    if (month < 10)
+    if (month < 10) // if statement is month is less than 10
     {
-        std::cout << 0;
+        std::cout << 0; // print a zero if the month is less than 10
     }
-    std::cout << month << "-";
+    std::cout << month << "-"; // if not then print the month and a space
     
-    if (day < 10)
+    if (day < 10) // if statement is day is less than 10
     {
-        std::cout << 0;
+        std::cout << 0; // print a zero if the day is less than 10
     }
-    std::cout << day;
+    std::cout << day; // printing the day
 }
 
 // TODO: daysBetween
@@ -372,7 +373,7 @@ void printDate(int day, int month, int year)
 //   Constraint:   use daysSince1900.
 int daysBetween(int day1, int month1, int year1, int day2, int month2, int year2)
 {
-    return daysSince1900(day2, month2, year2) - daysSince1900(day1, month1, year1);
+    return daysSince1900(day2, month2, year2) - daysSince1900(day1, month1, year1); // returning the difference between two given dates
 }
 
 // TODO: randomInRange
@@ -384,8 +385,10 @@ int daysBetween(int day1, int month1, int year1, int day2, int month2, int year2
 //   Constraint:   do not call srand in this function.
 int randomInRange(int low, int high)
 {
-    long long range = static_cast<long long>(high) - low + 1;
-    return low + static_cast<int>(rand() % range);
+    long long range = static_cast<long long>(high) - low + 1; // calculating the range of possible values
+    // long long used for range to handle large differences
+    // static_cast used to convert the result of rand() % range to an int
+    return low + static_cast<int>(rand() % range); // returning a random value within the range
 }
 
 // TODO: randomDate
@@ -404,7 +407,7 @@ int randomInRange(int low, int high)
 //   Constraint:   do not call srand in this function.
 void randomDate(int& day, int& month, int& year, int minYear, int maxYear)
 {
-    year = randomInRange(minYear, maxYear);
-    month = randomInRange(1, 12);
-    day = randomInRange(1, daysInMonth(month, year));
+    year = randomInRange(minYear, maxYear); // generating a random year within the range
+    month = randomInRange(1, 12); // generating a random month within the range
+    day = randomInRange(1, daysInMonth(month, year)); // generating a random day within the range
 }
